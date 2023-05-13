@@ -55,7 +55,7 @@ export async function getStaticProps() {
 
   try {
     const response = await fetch(
-      "https://skills-d42b3-default-rtdb.firebaseio.com/skills.json"
+      "https://my-skills-api-b0ed1-default-rtdb.firebaseio.com/skills.json"
     );
     const data = await response.json();
     skills = data.split(",");
