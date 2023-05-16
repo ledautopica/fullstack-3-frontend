@@ -1,7 +1,5 @@
 import { Grid, Button, Chip, Stack } from "@mui/material";
-
 import { useRouter } from "next/router";
-
 import PageDescription from "@/components/PageDescription";
 
 export default function AboutPage({ skills }) {

@@ -4,7 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useState } from 'react';
 
-export default function ProjectForm ({ onSubmit }) {
+export default function ProjectForm ({ onSubmit, editValues }) {
 
   const defaultValues = {
     name: "",
@@ -12,6 +12,7 @@ export default function ProjectForm ({ onSubmit }) {
     overview: "",
     tools: [],
     imageUrl: "",
+    projectLink: "",
   }
 
   const [skills, setSkills] = useState([])
@@ -23,7 +24,7 @@ export default function ProjectForm ({ onSubmit }) {
   const fetchSkills = async () => {
     try {
       const response = await fetch(
-        "https://my-skills-api-b0ed1-default-rtdb.firebaseio.com/skills.json"
+        "https://mike-skills-api-123123-default-rtdb.firebaseio.com/skills.json"
       );
       const data = await response.json();
       const skillsArray = data.split(",");
@@ -39,10 +40,11 @@ export default function ProjectForm ({ onSubmit }) {
     overview: yup.string(),
     tools: yup.array(),
     imageUrl: yup.string(),
+    projectLink: yup.string(),
   })
 
   const { control, watch, reset, handleSubmit } = useForm({
-    defaultValues,
+    defaultValues: editValues || defaultValues,
     resolver: yupResolver(projectFormSchema),
     mode: 'all',
   })
@@ -142,6 +144,22 @@ export default function ProjectForm ({ onSubmit }) {
                   </MenuItem>
                 ))}
               </Select>
+            )}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Controller
+            control={ control }
+            name='projectLink'
+            render={ ({ field, fieldState }) => (
+              <TextField
+                { ...field }
+                label='Project link'
+                variant='outlined'
+                fullWidth
+                error={ !!fieldState.error }
+                helperText={ fieldState.error?.message }
+              />
             )}
           />
         </Grid>
