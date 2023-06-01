@@ -1,3 +1,4 @@
+import { getProjects } from "@/api/projects";
 import PageDescription from "@/components/PageDescription";
 import ProjectItem from "@/components/ProjectItem";
 
