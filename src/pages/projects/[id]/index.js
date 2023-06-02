@@ -82,7 +82,6 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   try {
-    
     const project = await getProject(params.id);
 
     return {
